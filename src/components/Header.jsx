@@ -19,24 +19,24 @@ const Header = () => {
         {/* Menu de navegação para desktop */}
         <nav className="hidden md:flex flex-1 justify-center">
           <ul className="flex items-center gap-14 text-slate-50">
-            <li><Link to="/" className="line">Início</Link></li>
-            <li><Link to="/sobre" className="line">Sobre</Link></li>
-            <li><Link to="/contato" className="line">Contato</Link></li>
+            <li><a href="/" className="line">Início</a></li>
+            <li><a href="/sobre" className="line">Sobre</a></li>
+            <li><a href="/contato" className="line">Contato</a></li>
           </ul>
         </nav>
 
         {/* Botão "Entrar" para desktop */}
-        <Link
-          to="/login"
+        <a
+          href="/login"
           className="hidden md:block border px-4 py-1.5 transition-colors duration-300 hover:bg-slate-50 hover:text-black hover:border-slate-50 rounded">
           Entrar
-        </Link>
+        </a>
       </div>
 
       {/* Botão de abrir Menu Hamburguer para Mobile */}
       <Menu
         onClick={() => setIsMenuOpen(true)}
-        className={`text-slate-50 md:hidden cursor-pointer absolute right-0 top-1/2 -translate-y-1/2`}
+        className={`text-slate-50 md:hidden cursor-pointer absolute right-3 top-1/2 -translate-y-1/2`}
         size="50"
       />
 
@@ -50,31 +50,31 @@ const Header = () => {
         </div>
         <ul className="pt-7 px-8 flex flex-col gap-9 text-xl">
           <li>
-            <Link to="/" className="border-b flex items-center border-azul-300 pb-2.5" onClick={() => setIsMenuOpen(false)}>
+            <a href="/" className="border-b flex items-center border-azul-300 pb-2.5" onClick={() => setIsMenuOpen(false)}>
               <div className="gap-2 flex hover:text-slate-300 transition-color duration-300">
               <div className="flex justify-center items-center w-8"><House size={17} /></div>
               Início</div>
-            </Link>
+            </a>
           </li>
           <li>
-            <Link to="/sobre" className="border-b flex items-center border-azul-300 pb-2.5" onClick={() => setIsMenuOpen(false)}>
+            <a href="/sobre" className="border-b flex items-center border-azul-300 pb-2.5" onClick={() => setIsMenuOpen(false)}>
              <div className="gap-2 flex hover:text-slate-300 transition-color duration-300">
               <div className="flex justify-center items-center w-8"><NotepadText size={17} /></div>
               Sobre</div>
-            </Link>
+            </a>
           </li>
           <li>
-            <Link to="/contato" className="border-b flex items-center border-azul-300 pb-2.5" onClick={() => setIsMenuOpen(false)}>
+            <a href="/contato" className="border-b flex items-center border-azul-300 pb-2.5" onClick={() => setIsMenuOpen(false)}>
               <div className="gap-2 flex hover:text-slate-300 transition-color duration-300">
               <div className="flex justify-center items-center w-8"><MailOpen size={17} /></div>
               Contato</div>
-            </Link>
+            </a>
           </li>
           <li>
-            <Link to="/login" className="shadow-sm hover:brightness-110 transition-all duration-300 bg-gradient-to-r from-amber-600 to-orange-600 rounded-sm font-medium justify-center flex items-center gap-2 p-4" onClick={() => setIsMenuOpen(false)}>
+            <a href="/login" className="shadow-sm hover:brightness-110 transition-all duration-300 bg-gradient-to-r from-amber-600 to-orange-600 rounded-sm font-medium justify-center flex items-center gap-2 p-4" onClick={() => setIsMenuOpen(false)}>
               <div className="gap-2 flex justify-center items-center w-8"><PiUserCircle /></div>
               Entrar / Cadastrar-se
-            </Link>
+            </a>
           </li>
         </ul>
       </div>

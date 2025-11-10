@@ -311,7 +311,7 @@ const canEditComanda = isComandaAberta || isComandaProntaParaEntrega;
       <Sidebar />
       <ToastContainer autoClose={3000} hideProgressBar />
       <div className="flex flex-col w-full pl-20 py-4 pr-4 md:pl-25 md:pr-9 overflow-y-auto">
-        <HeaderLogged hasUndo link="/novo-pedido"></HeaderLogged>
+        <HeaderLogged hasUndo/>
         
         <main className="flex flex-col lg:flex-row w-full gap-5">
           
@@ -404,14 +404,14 @@ const canEditComanda = isComandaAberta || isComandaProntaParaEntrega;
                 <div className="flex justify-between gap-2">
                   <button
                     type="button"
-                    className="text-lg cursor-pointer shadow-sm bg-slate-600 text-slate-50 font-medium rounded py-2 text-center flex-2 disabled:bg-slate-400"
+                    className="cursor-pointer shadow-sm bg-slate-600 text-slate-50 font-medium rounded py-2 text-center flex-2 disabled:bg-slate-400"
                     onClick={() => setShowCardapioModal(true)}
                   >
                     Selecionar pelo cardápio
                   </button>
                   <button
                     type="submit"
-                    className="text-lg cursor-pointer shadow-sm bg-blue-600 text-slate-50 font-medium rounded py-2 text-center flex-1 disabled:bg-slate-400"
+                    className="cursor-pointer shadow-sm bg-blue-600 text-slate-50 font-medium rounded py-2 text-center flex-1 disabled:bg-slate-400"
                   >
                     Adicionar
                   </button>
@@ -442,7 +442,7 @@ const canEditComanda = isComandaAberta || isComandaProntaParaEntrega;
                   comanda.itens.map((item) => {
                     
                       // --- Lógica de Status do Item ---
-                      let itemClass = "text-slate-700"; 
+                      let itemClass = "text-slate-600"; 
                       let statusText = item.status; 
 
                       if (!item.status) {

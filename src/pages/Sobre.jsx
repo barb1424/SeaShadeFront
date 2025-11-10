@@ -17,7 +17,7 @@ const Sobre = () => {
           </h1>
           
           {/* Container para os parágrafos, com espaçamento e estilo de texto */}
-          <div className="space-y-6 text-slate-700 text-lg text-justify leading-relaxed">
+          <div className="space-y-6 text-slate-600 text-lg text-justify leading-relaxed">
             <p>
               O SeaShade nasceu em Santos, uma cidade litorânea cuja história e economia estão profundamente ligadas ao turismo e à vida na praia. Nosso sistema foi desenvolvido para facilitar o dia a dia de empreendedores e equipes que atuam nesse ambiente dinâmico, permitindo que eles foquem no que realmente importa: <strong className="font-semibold text-blue-800">oferecer um atendimento de qualidade aos clientes.</strong>
             </p>

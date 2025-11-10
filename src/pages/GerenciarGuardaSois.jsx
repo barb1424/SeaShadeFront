@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom'; 
+import { useNavigate, Link } from 'react-router-dom';
 import apiClient from '../services/apiClient';
 import { useAuth } from '../context/AuthContext';
-import Modal from '../components/Modal' 
-import { Plus, ArrowLeft, Edit, Trash2 } from 'lucide-react'; 
+import Modal from '../components/Modal'
+import { Plus, ArrowLeft, Edit, Trash2 } from 'lucide-react';
 
 const GerenciarGuardaSois = () => {
     const { user } = useAuth();
@@ -47,16 +47,16 @@ const GerenciarGuardaSois = () => {
     // --- EFEITO PARA BUSCAR DADOS AO CARREGAR A PÁGINA ---
     useEffect(() => {
         setLoading(true);
-        if (user && quiosqueId) { 
+        if (user && quiosqueId) {
             fetchGuardaSois();
-        } else if (user && !quiosqueId) { 
-             setError("Quiosque não identificado. Faça login novamente.");
-             setLoading(false);
+        } else if (user && !quiosqueId) {
+            setError("Quiosque não identificado. Faça login novamente.");
+            setLoading(false);
         } else {
-             setLoading(false); 
+            setLoading(false);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [user, quiosqueId]); 
+    }, [user, quiosqueId]);
 
     // --- FUNÇÃO PARA CRIAR GUARDA-SOL ---
     const handleCriarGuardaSol = async (e) => {
@@ -66,7 +66,7 @@ const GerenciarGuardaSois = () => {
             return;
         }
         setIsSubmitting(true);
-        setError(''); 
+        setError('');
         try {
             const response = await apiClient.post(`/api/quiosques/${quiosqueId}/guardasois`, {
                 identificacao: novaIdentificacao
@@ -133,7 +133,7 @@ const GerenciarGuardaSois = () => {
 
     // --- RENDERIZAÇÃO ---
     if (loading) {
-        return <div className="p-10">Carregando guarda-sóis...</div>; 
+        return <div className="p-10">Carregando guarda-sóis...</div>;
     }
 
     return (
@@ -153,41 +153,47 @@ const GerenciarGuardaSois = () => {
             <div className="mb-6 flex justify-end">
                 <button
                     onClick={() => { setShowAddModal(true); setError(''); }} // Limpa erro ao abrir modal
-                    className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700 transition"
+                    className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700 transition cursor-pointer"
                 >
-                    <Plus size={20} /> Adicionar Guarda-sol
+                    <Plus size={20} /> Adicionar
                 </button>
             </div>
 
             {/* Tabela */}
             <div className="bg-white rounded shadow overflow-hidden">
                 <table className="min-w-full divide-y divide-gray-200">
+
                     <thead className="bg-gray-100">
                         <tr>
-                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Identificação</th>
-                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status Atual</th>
-                            <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
+                            <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Identificação
+                            </th>
+                            <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Status Atual
+                            </th>
                         </tr>
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
                         {guardaSois.map((gs) => (
-                            <tr key={gs.id}>
-                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{gs.id}</td>
-                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{gs.identificacao}</td>
-                                <td className="px-6 py-4 whitespace-nowrap text-sm">
+                            <tr key={gs.identificacao}>
+                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700 text-center">
+                                    {gs.identificacao}
+                                </td>
+
+                                <td className="px-6 py-4 whitespace-nowrap text-sm text-center relative">
                                     <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${gs.status === 'LIVRE' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
                                         {gs.status}
                                     </span>
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <button onClick={() => openEditModal(gs)} className="text-indigo-600 hover:text-indigo-900 mr-3" title="Editar Identificação"><Edit size={18} /></button>
-                                    <button onClick={() => handleDesativarGuardaSol(gs.id)} className="text-red-600 hover:text-red-900" title="Desativar Guarda-sol"><Trash2 size={18} /></button>
+                                    <button
+                                        className="absolute right-4 top-1/2 -translate-y-1/2 text-red-600 hover:text-red-800 cursor-pointer"
+                                        onClick={() => handleDesativarGuardaSol(gs.id)}>
+                                        <Trash2 size={20} />
+                                    </button>
                                 </td>
                             </tr>
                         ))}
                         {guardaSois.length === 0 && (
-                            <tr><td colSpan="4" className="text-center py-4 text-gray-500">Nenhum guarda-sol cadastrado.</td></tr>
+                            <tr><td colSpan="2" className="text-center py-4 text-gray-500">Nenhum guarda-sol cadastrado.</td></tr>
                         )}
                     </tbody>
                 </table>
@@ -201,8 +207,8 @@ const GerenciarGuardaSois = () => {
                     {error && showAddModal && <p className="text-red-500 mb-4 bg-red-100 p-2 rounded text-sm">{error}</p>}
                     <form onSubmit={handleCriarGuardaSol}>
                         <div className="mb-4">
-                            <label htmlFor="identificacaoAdd" className="block text-sm font-medium text-gray-700 mb-1">Identificação*</label>
-                            <input type="text" id="identificacaoAdd" value={novaIdentificacao} onChange={(e) => setNovaIdentificacao(e.target.value)} className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="Ex: G01, Mesa 5" required />
+                            <label htmlFor="identificacaoAdd" className="block text-sm font-medium text-gray-700 mb-1">Quantidade</label>
+                            <input type="number" id="identificacaoAdd" value={novaIdentificacao} onChange={(e) => setNovaIdentificacao(e.target.value)} className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="Ex: 20" required />
                         </div>
                         <div className="flex justify-end gap-3 mt-6">
                             <button type="button" onClick={() => setShowAddModal(false)} className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50">Cancelar</button>

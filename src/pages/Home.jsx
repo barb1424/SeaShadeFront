@@ -24,7 +24,7 @@ const Home = () => {
     <div>
       {/* SEÇÃO 1 */}
       <div className="bg-sky-600 relative">
-        <div className='flex flex-col relative min-h-[90vh]'>
+        <div className='flex flex-col relative min-h-screen'>
           <Header />
           <div className="relative z-10 w-full mx-auto flex-1 flex flex-col justify-center px-4">
             <main className="flex flex-col md:flex-row flex-1 md:mt-40 md:text-left justify-center">
@@ -41,8 +41,8 @@ const Home = () => {
                   </p>
                 </div>
                 <div className="flex flex-col md:flex-row mt-8">
-                  <Link
-                    to="/cadastro" className="bg-gradient-to-r from-yellow-500 to-orange-500 text-slate-50 font-semibold rounded lg:px-24 md:px-24 cursor-pointer md:text-2xl text-2xl py-4 text-center shadow-sm hover:opacity-90 transition-opacity">Comece já</Link>
+                  <a
+                    href="/cadastro" className="bg-gradient-to-r from-yellow-500 to-orange-500 text-slate-50 font-semibold rounded lg:px-24 md:px-24 cursor-pointer md:text-2xl text-2xl py-4 text-center shadow-sm hover:opacity-90 transition-opacity">Comece já</a>
                   <div className="text-slate-50 lg:px-24 md:px-24 md:text-2xl text-2xl py-4 text-center"><a href="#sobre" className="flex items-center justify-center hover:underline">Saiba mais</a></div>
                 </div>
               </div>
@@ -55,7 +55,7 @@ const Home = () => {
       </div>
 
       {/* SEÇÃO 2 */}
-      <section id="sobre" className="py-24 px-6 bg-slate-50 text-slate-700 relative">
+      <section id="sobre" className="py-15 px-6 bg-slate-50 text-slate-600 relative">
         <div className="max-w-screen-xl mx-auto w-full text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4">
             Chegamos para facilitar a vida de quem trabalha na praia
@@ -116,7 +116,7 @@ const Home = () => {
               <p className="text-slate-600 text-lg leading-relaxed">O primeiro passo é o mais rápido. Cadastre seus produtos, bebidas e porções. Adicione preços e descrições para que sua equipe tenha tudo na mão.</p>
             </div>
             <div className="lg:w-1/2 flex justify-center lg:justify-end">
-              <img src={deitado} alt="Tela de cardápio do sistema em um tablet" className="max-w-md rounded-lg " width={540} height={650} />
+              <img src={deitado} alt="Tela de cardápio do sistema em um tablet" className="max-w-md rounded-lg " width={340} height={650} />
             </div>
           </div>
 
@@ -160,12 +160,12 @@ const Home = () => {
               Deixe a papelada de lado e veja na prática como o SeaShade pode transformar seu negócio.
             </p>
             <div className="mt-8 flex justify-center">
-              <Link
-                to="/cadastro"
+              <a
+                href="/cadastro"
                 className="w-full sm:w-auto inline-block bg-orange-500 text-white font-bold py-3 px-8 rounded-lg hover:bg-orange-600 transition-colors shadow"
               >
                 Cadastre-se gratuitamente
-              </Link>
+              </a>
             </div>
           </div>
         </div>

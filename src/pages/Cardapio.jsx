@@ -15,7 +15,7 @@ const Cardapio = () => {
     const [categoriaSelecionada, setCategoriaSelecionada] = useState('Todos');
     const [termoBusca, setTermoBusca] = useState('');
     const [showModal, setShowModal] = useState(false); 
-    const [showModal2, setShowModal2] = useState(false); 
+    const [showModal2, setShowModal2] = useState(false);
     const [showReceitaModal, setShowReceitaModal] = useState(false);
     const [produtoSelecionado, setProdutoSelecionado] = useState(null); 
 
@@ -24,8 +24,9 @@ const Cardapio = () => {
         descricao: '',
         preco: '',
         categoria: 'BEBIDA', 
-        estoque: 0
     });
+
+    const [imagemArquivo, setImagemArquivo] = useState(null);
 
     const { user } = useAuth(); 
     const quiosqueId = user?.quiosque?.quiosqueId;
@@ -80,13 +81,27 @@ const Cardapio = () => {
             return;
         }
         try {
+            const formData = new FormData();
+            // Anexa o arquivo de imagem, se existir
+            if (imagemArquivo) {
+                formData.append('imagem', imagemArquivo);
+            }
+            // Anexa os dados do produto como uma string JSON
+            formData.append('produto', new Blob([JSON.stringify(novoProduto)], { type: 'application/json' }));
+
             const response = await apiClient.post(
                 `/api/quiosques/${quiosqueId}/produtos`,
-                novoProduto
+                formData,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                }
             );
             setProdutos(produtosAtuais => [...produtosAtuais, response.data]);
             setShowModal(false);
-            setNovoProduto({ nome: '', descricao: '', preco: '', categoria: 'BEBIDA', estoque: 0 });
+            setNovoProduto({ nome: '', descricao: '', preco: '', categoria: 'BEBIDA'});
+            setImagemArquivo(null); // Limpa o arquivo após o envio
             toast.success("Produto criado com sucesso!");
         } catch (err) {
             console.error("Erro ao criar produto:", err);
@@ -116,12 +131,19 @@ const Cardapio = () => {
     };
 
     const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setNovoProduto(prevState => ({
-        ...prevState,
-        [name]: value
-    }));
-    };
+        const { name, value, type, files } = e.target;
+        if (type === 'file') {
+            setImagemArquivo(files[0]);
+        } else {
+            setNovoProduto(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+        }
+    };
+
+
+
 
     const handleOpenReceitaModal = (produto) => {
         setProdutoSelecionado(produto);
@@ -135,11 +157,11 @@ const Cardapio = () => {
 
     if (loading) {
         return (
-            <div className="text-slate-700 flex h-screen">
+            <div className="text-slate-00 flex h-screen">
                 <Sidebar />
                 <div className="flex flex-col w-full pl-20 py-4 pr-4 md:pl-25 md:pr-9">
                     <HeaderLogged />
-                    <h1 className="text-3xl font-bold mb-6 text-blue-600">Carregando Cardápio...</h1>
+                    <h1 className="text-3xl font-bold mb-6 text-slate-600">Carregando Cardápio...</h1>
                 </div>
             </div>
         );
@@ -147,10 +169,10 @@ const Cardapio = () => {
     
     if (error) {
         return (
-             <div className="text-slate-700 flex h-screen">
+             <div className="text-slate-600 flex h-screen">
                 <Sidebar />
                 <div className="flex flex-col w-full pl-20 py-4 pr-4 md:pl-25 md:pr-9">
-                    <HeaderLogged />
+                    <HeaderLogged hasUndo />
                     <h1 className="text-3xl font-bold mb-6 text-red-500">{error}</h1>
                 </div>
             </div>
@@ -161,11 +183,11 @@ const Cardapio = () => {
         <div className="text-slate-700 flex h-screen">
             <Sidebar />
             <div className="flex flex-col w-full pl-20 py-4 pr-4 md:pl-25 md:pr-9 overflow-y-auto">
-                <HeaderLogged />
-                <h1 className="text-3xl font-bold mb-6 text-blue-600">Cardápio</h1>
+                <HeaderLogged hasUndo />
+                <h1 className="text-2xl md:text-3xl font-bold text-slate-600">Cardápio</h1>
 
                 {/* Busca */}
-                <div className="mb-6 flex justify-between w-full gap-3">
+                <div className="my-6 flex justify-between w-full gap-3">
                     <div className="relative flex-30 r">
                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5" />
                         <input
@@ -179,10 +201,11 @@ const Cardapio = () => {
                     <div className="flex-1 flex justify-end items-center gap-2">
                         <button
                             onClick={() => setShowModal(true)}
-                            className="bg-blue-600 rounded text-white p-1 aspect-square flex items-center justify-center cursor-pointer"
+                            className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700 transition cursor-pointer"
                         >
-                            <Plus />
+                            <Plus size={20} /> Adicionar
                         </button>
+
                     </div>
                 </div>
 
@@ -195,7 +218,7 @@ const Cardapio = () => {
                             className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors ${
                                                     categoriaSelecionada === categoria
                                                         ? 'bg-blue-600 text-white'
-                                                        : 'bg-white text-slate-700 border border-slate-300 hover:bg-slate-100'
+                                                        : 'bg-white text-slate-600 border border-slate-300 hover:bg-slate-100'
                                                 }`}
                                             >
                             {categoria} 
@@ -206,7 +229,7 @@ const Cardapio = () => {
                 {/* Modal "Novo Produto" */}
                 <Modal isVisible={showModal} onClose={() => setShowModal(false)}>
                         <div className="p-6">
-                        <h3 className="text-2xl font-semibold text-slate-700 mb-7">Adicionar item ao cardápio</h3>
+                        <h3 className="text-2xl font-semibold text-slate-00 mb-7">Adicionar item ao cardápio</h3>
                         
                         <form className="text-lg flex flex-col gap-4" onSubmit={handleCreateProduto}>
                             <div className="flex flex-col gap-1">
@@ -217,6 +240,14 @@ const Cardapio = () => {
                                       onChange={handleInputChange} />
                             </div>
                             
+                            <div className="flex flex-col gap-1">
+                                <label htmlFor="imagem">Imagem do Produto</label>
+                                <input type="file" name="imagem" id="imagem"
+                                    accept="image/png, image/jpeg, image/webp"
+                                      className="bg-white p-2 rounded border file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                                      onChange={handleInputChange} />
+                            </div>
+
                             <div className="flex flex-col gap-1">
                                 <label htmlFor="descricao">Descrição</label>
                                 <textarea name="descricao" id="descricao" placeholder="Descrição do item" 
@@ -225,12 +256,8 @@ const Cardapio = () => {
                                           onChange={handleInputChange} />
                             </div>
                             
-                            <div className="flex flex-col gap-1">
-                                <label htmlFor="preco">Preço</label>
-                                <input type="number" step="0.01" name="preco" id="preco" placeholder="R$ 0,00" required 
-                                      className="bg-white p-2 rounded"
-                                      value={novoProduto.preco} 
-                                      onChange={handleInputChange} />
+                            <div className="flex flex-col gap-1">
+                                <label htmlFor="imagemUrl">URL da Imagem</label>
                             </div>
                             
                             <div className="flex flex-col gap-1">
@@ -239,19 +266,11 @@ const Cardapio = () => {
                                         className="bg-white p-2 rounded"
                                         value={novoProduto.categoria} 
                                         onChange={handleInputChange}>
-                                    <option value="BEBIDA_ALCOOLICA">Bebida Alcoólica</option>
+                                    <option value="BEBIDA ALCOOLICA">Bebida Alcoólica</option>
                                     <option value="PORCAO">Porção</option>
                                     <option value="BEBIDA">Bebida</option>
                                 </select>
                             </div>
-                            
-                            <div className="flex flex-col gap-1">
-                                <label htmlFor="estoque">Estoque</label>
-                                <input type="number" name="estoque" id="estoque" placeholder="0" required 
-                                      className="bg-white p-2 rounded"
-                                      value={novoProduto.estoque} 
-                                      onChange={handleInputChange} />
-                         </div>
 
                             <button type="submit" className="bg-blue-600 text-white py-2 rounded hover:bg-teal-600 transition">
                                 Adicionar Item
@@ -261,7 +280,7 @@ const Cardapio = () => {
                 </Modal>
 
                 {/* Modal "Deletar" */}
-                <Modal isVisible={showModal2} onClose={() => { setShowModal2(false); setProdutoSelecionado(null); }}>
+                <Modal isVisible={showModal2} onClose={() => { setShowModal2(false); setProdutoSelecionado(null); }}> 
                     <div className="p-6">
                         <h3 className="text-xl font-semibold">Confirmar Exclusão</h3>
                         <p className="my-4">Tem certeza que quer excluir o item "{produtoSelecionado?.nome}"?</p>
@@ -271,7 +290,6 @@ const Cardapio = () => {
                         </div>
                     </div>
                 </Modal>
-
 
                 {/* Lista de Itens (Cardápio) */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

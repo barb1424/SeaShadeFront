@@ -53,7 +53,7 @@ const Sidebar = ({noturno}) => {
                     
                     <Link to = "/relatorios"><li className={`cursor-pointer h-full flex p-2 items-center ${hoverBg} ${hoverText} rounded transition-all duration-200 truncate`}><div className={`flex min-w-10 ${!expanded && "justify-center"}`}><ChartSpline/></div><div className={`${expanded? "flex-grow" : "overflow-hidden transition-all w-0"}`}>Relatórios</div></li></Link>
                     
-                    <Link to = "/modo-producao"><li className={`cursor-pointer h-full flex p-2 items-center ${hoverBg} ${hoverText} rounded transition-all duration-200 truncate`}><div className={`flex min-w-10 ${!expanded && "justify-center"}`}><ChefHat/></div><div className={`${expanded? "flex-grow" : "overflow-hidden transition-all w-0"}`}>Modo Produção</div></li></Link>
+                    <Link to = "/modo-producao"><li className={`cursor-pointer h-full flex p-2 items-center ${hoverBg} ${hoverText} rounded transition-all duration-200 truncate`}><div className={`flex min-w-10 ${!expanded && "justify-center"}`}><ChefHat/></div><div className={`${expanded? "flex-grow" : "overflow-hidden transition-all w-0"}`}>Cozinha</div></li></Link>
                 
                 </ul>
                 <ul className="flex flex-col flex-1 justify-around">

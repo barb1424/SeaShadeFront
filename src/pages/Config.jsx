@@ -85,13 +85,12 @@ const Config = () => {
     <div className="text-slate-600 h-screen flex">
       <Sidebar />
       <div className="flex flex-col w-full pl-20 py-4 pr-4 md:pl-25 md:pr-9">
-        <h1 className="text-3xl font-bold mb-5 text-blue-600 mt-15">Funcionários</h1>
+        <h1 className="text-3xl font-bold text-slate-600 mt-15">Central de Colaboradores</h1>
 
-        {/* <div className="bg-white shadow rounded p-6 mb-6"> ... </div> */}
 
         {/* Cadastro de funcionários */}
-        <div className="bg-white shadow rounded p-6 mb-6">
-          <h2 className="text-2xl font-semibold mb-4">Cadastro
+        <div className="bg-white my-5">
+          <h2 className="text-2xl font-semibold mb-4 text-blue-600">Cadastro
           </h2>
           <form onSubmit={handleSubmitFuncionario} className="flex flex-col md:flex-row gap-4 mb-4">
             <input
@@ -116,7 +115,7 @@ const Config = () => {
               Adicionar 
             </button>
           </form>
-            <h2 className="text-2xl font-semibold mb-4">Seus funcionários
+            <h2 className="text-2xl font-semibold mb-4 text-blue-600">Seus funcionários
           </h2>
           {/* Lista de funcionários */}
           {funcionarios.length > 0 && (

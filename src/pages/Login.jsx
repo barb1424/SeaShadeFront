@@ -37,7 +37,7 @@ const Login = () => {
       }
 
       try {
-        const loginResponse = await axios.post('https://seashade-backend.onrender.com/api/auth/login', {
+        const loginResponse = await axios.post('http://localhost:8080/api/auth/login', {
           email,
           password: pass,
         });
@@ -63,7 +63,7 @@ const Login = () => {
     } else {
             // --- FLUXO DE LOGIN PARA O ATENDENTE (CÓDIGO) ---
             try {
-                const response = await axios.post('https://seashade-backend.onrender.com/api/atendentes/login', { 
+                const response = await axios.post('http://localhost:8080//api/atendentes/login', { 
                     codigo: codigo, 
                 });
                 
@@ -87,9 +87,10 @@ const Login = () => {
     };
 
   return (
-    <div className="bg-slate-50 min-h-screen flex flex-col gap-1 md:gap-6">
+    <div>
+    <div className="bg-slate-50 flex flex-col md:gap-6 min-h-screen">
       <Header />
-      <main className="m-3 flex-1 flex flex-col items-center gap-5">
+      <main className="my-5 flex-1 flex flex-col items-center gap-5">
         <div className="flex flex-col items-center">
           <h1 className="flex-wrap flex items-center text-4xl font-medium px-4 py-4 text-blue-950 gap-3">
             <PiUserCircle size="35" strokeWidth={4}/>Entre na sua conta
@@ -104,7 +105,7 @@ const Login = () => {
 
             {!showCodigo && (
               <>
-                <label className="text-lg md:text-xl flex flex-col gap-2 text-slate-700">
+                <label className="text-lg md:text-xl flex flex-col gap-2 text-slate-600">
                   E-mail
                   <input
                     className="bg-white border border-slate-300 rounded px-4 py-3 inset-shadow-xs focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
@@ -115,7 +116,7 @@ const Login = () => {
                   />
                 </label>
 
-                <label className="text-lg md:text-xl flex flex-col gap-2 text-slate-700">
+                <label className="text-lg md:text-xl flex flex-col gap-2 text-slate-600">
                   Senha
                   <input
                     className="bg-white border border-slate-300 rounded px-4 py-3 inset-shadow-xs focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
@@ -129,7 +130,7 @@ const Login = () => {
             )}
 
             {showCodigo && (
-              <label className="text-lg md:text-xl flex flex-col gap-2 text-slate-700">
+              <label className="text-lg md:text-xl flex flex-col gap-2 text-slate-600">
                 Código
                 <input
                   className="bg-white border border-slate-300 rounded px-4 py-3 inset-shadow-xs focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
@@ -174,6 +175,8 @@ const Login = () => {
           </fieldset>
         </form>
       </main>
+      
+      </div>
       <Footer/>
     </div>
   );

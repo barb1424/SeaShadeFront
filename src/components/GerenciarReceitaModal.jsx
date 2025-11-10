@@ -132,7 +132,7 @@ const GerenciarReceitaModal = ({ produtoId, produtoNome, onClose }) => {
                     <>
                         {/* 2. Lista de Ingredientes Atuais */}
                         <div className="p-6 overflow-y-auto flex-1">
-                            <h4 className="text-lg font-semibold mb-2 text-slate-700">Ingredientes Atuais</h4>
+                            <h4 className="text-lg font-semibold mb-2 text-slate-600">Ingredientes Atuais</h4>
                             <div className="flex flex-col gap-2">
                                 {componentes.length === 0 && (
                                     <p className="text-slate-500">Nenhum ingrediente cadastrado para este produto.</p>
@@ -157,7 +157,7 @@ const GerenciarReceitaModal = ({ produtoId, produtoNome, onClose }) => {
 
                         {/* 3. Formulário "Adicionar Ingrediente" */}
                         <form onSubmit={handleAddIngrediente} className="p-6 border-t bg-slate-50">
-                            <h4 className="text-lg font-semibold mb-3 text-slate-700">Adicionar Ingrediente</h4>
+                            <h4 className="text-lg font-semibold mb-3 text-slate-600">Adicionar Ingrediente</h4>
                             <div className="flex flex-col md:flex-row gap-3">
                                 <select
                                     value={selectedEstoqueId}

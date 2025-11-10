@@ -42,7 +42,7 @@ const Cadastro = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post('https://seashade-backend.onrender.com/api/auth/register', {
+      const response = await axios.post('http://localhost:8080/api/auth/register', {
         name: name,
         email: email,
         password: password,
@@ -61,9 +61,10 @@ const Cadastro = () => {
   };
 
   return (
-    <div className="bg-slate-50 min-h-screen flex flex-col gap-1 md:gap-6">
+    <div>
+    <div className="bg-slate-50 flex flex-col md:gap-6 min-h-screen">
       <Header />
-      <main className="m-3 flex-1 flex flex-col items-center gap-5">
+      <main className="my-5 flex-1 flex flex-col items-center gap-5">
         <div className="flex flex-col items-center">
           <h1 className="flex-wrap flex items-center text-4xl font-medium px-4 py-4 text-blue-950 gap-3">
             <PiUserCirclePlus size="35" strokeWidth={4} />Faça seu cadastro
@@ -76,7 +77,7 @@ const Cadastro = () => {
         <form className="w-full md:max-w-md max-w-sm mx-auto" onSubmit={handleCadastro}>
   <fieldset className="w-full flex flex-col gap-5">
     
-    <label className="text-lg md:text-xl flex flex-col gap-2 text-slate-700">
+    <label className="text-lg md:text-xl flex flex-col gap-2 text-slate-600">
       Nome
       <input 
         className="bg-white border border-slate-300 rounded px-4 py-3 inset-shadow-xs focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
@@ -87,7 +88,7 @@ const Cadastro = () => {
       />
     </label>
 
-    <label className="text-lg md:text-xl flex flex-col gap-2 text-slate-700">
+    <label className="text-lg md:text-xl flex flex-col gap-2 text-slate-600">
       Nome do estabelecimento
       <input 
         className="bg-white border border-slate-300 rounded px-4 py-3 inset-shadow-xs focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
@@ -98,7 +99,7 @@ const Cadastro = () => {
       />
     </label>
 
-    <label className="text-lg md:text-xl flex flex-col gap-2 text-slate-700">
+    <label className="text-lg md:text-xl flex flex-col gap-2 text-slate-600">
       E-mail
       <input 
         className="bg-white border border-slate-300 rounded px-4 py-3 inset-shadow-xs focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
@@ -109,7 +110,7 @@ const Cadastro = () => {
       />
     </label>
 
-    <label className="text-lg md:text-xl flex flex-col gap-2 text-slate-700">
+    <label className="text-lg md:text-xl flex flex-col gap-2 text-slate-600">
       Senha
       <input 
         className="bg-white border border-slate-300 rounded px-4 py-3 inset-shadow-xs focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
@@ -120,7 +121,7 @@ const Cadastro = () => {
       />
     </label>
 
-    <label className="text-lg md:text-xl flex flex-col gap-2 text-slate-700">
+    <label className="text-lg md:text-xl flex flex-col gap-2 text-slate-600">
       Confirme sua Senha
       <input 
         className="bg-white border border-slate-300 rounded px-4 py-3 inset-shadow-xs focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
@@ -146,7 +147,9 @@ const Cadastro = () => {
 </form>
 
       </main>
-      <Footer /> 
+      
+      </div> 
+      <Footer />
     </div>
   );
 };

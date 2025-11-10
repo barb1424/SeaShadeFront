@@ -28,9 +28,9 @@ const Footer = () => {
         <div className="p-6 rounded-lg">
           <h2 className="text-lg font-semibold mb-3">Links</h2>
           <ul className="text-sm space-y-2">
-            <li><a href="#" className="hover:underline transition-colors duration-200">Home</a></li>
-            <li><a href="#" className="hover:underline transition-colors duration-200">Sobre</a></li>
-            <li><a href="#" className="hover:underline transition-colors duration-200">Contato</a></li>
+            <li><a href="/" className="hover:underline transition-colors duration-200">Home</a></li>
+            <li><a href="/sobre" className="hover:underline transition-colors duration-200">Sobre</a></li>
+            <li><a href="/contato" className="hover:underline transition-colors duration-200">Contato</a></li>
           </ul>
         </div>
 

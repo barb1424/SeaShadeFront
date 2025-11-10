@@ -22,7 +22,7 @@ const IconList = ({ guardaSois = [], onGuardaSolClick, selectedGuardaSolId }) =>
                         <PiUmbrellaFill 
                             className={`${iconColor} text-4xl md:text-5xl`} 
                         />
-                        <span className={`text-sm font-semibold ${isSelected ? 'text-blue-700' : 'text-slate-700'}`}> 
+                        <span className={`text-sm font-semibold ${isSelected ? 'text-blue-700' : 'text-slate-600'}`}> 
                             {guardaSol.identificacao}
                         </span>
                     </div>

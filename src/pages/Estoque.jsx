@@ -146,8 +146,8 @@ const Estoque = () => {
         <div className="text-slate-600 h-screen flex ">
             <Sidebar />
             <div className="flex flex-col w-full pl-20 py-4 pr-4 md:pl-25 md:pr-9">
-                <HeaderLogged />
-                <h1 className="text-2xl md:text-3xl font-bold mb-5 text-blue-600">Estoque</h1>
+                <HeaderLogged hasUndo />
+                <h1 className="text-2xl md:text-3xl font-bold mb-5">Estoque</h1>
                 <div className=" flex items-end justify-between gap-1">
                     <div className="flex gap-1 h-full">
                         <button className={`rounded-t py-2 px-3 flex items-center font-semibold  cursor-pointer mb-1 text-slate-800 ${showTable ? " bg-slate-200" : "bg-slate-100"}`} onClick={() => setShowTable(true)}>Lista de produtos</button>
@@ -162,7 +162,7 @@ const Estoque = () => {
 
                     <Modal isVisible={showModal} onClose={() => setShowModal(false)}>
                         <div className="p-6">
-                            <h3 className="text-2xl font-semibold text-slate-700 mb-5">{isNewItem ? "Criar Novo Item no Estoque" : "Registrar Movimentação"}</h3>
+                            <h3 className="text-2xl font-semibold text-slate-600 mb-5">{isNewItem ? "Criar Novo Item no Estoque" : "Registrar Movimentação"}</h3>
                             <form className="text-lg flex flex-col gap-4" onSubmit={handleFormSubmit}>
                                 <div className="flex items-center gap-2 mb-4">
                                     <input type="checkbox" id="isNewItemCheckbox" className="h-4 w-4" checked={isNewItem} onChange={() => setIsNewItem(!isNewItem)} />
@@ -183,7 +183,7 @@ const Estoque = () => {
                                 ) : (
                                     <>
                                         <div className="flex flex-col gap-1">
-                                            <label htmlFor="itemEstoqueId">Selecione o item (ID)*</label>
+                                            <label htmlFor="itemEstoqueId">Selecione o item (ID ou nome)*</label>
                                             <input placeholder="Digite o ID do item" type="number" name="itemEstoqueId" id="itemEstoqueId" required className="bg-white p-2 rounded" value={formData.itemEstoqueId} onChange={handleInputChange} />
                                         </div>
                                         <div className="flex flex-col gap-1">

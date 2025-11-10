@@ -34,7 +34,7 @@ const Ajuda = () => {
     <div className="text-slate-600 h-screen flex">
       <Sidebar />
       <div className="flex flex-col w-full pl-20 py-4 pr-4 md:pl-25 md:pr-9">
-        <HeaderLogged />
+        <HeaderLogged hasUndo />
         <h1 className="text-3xl font-bold mb-5 text-blue-600">Ajuda - SeaShade</h1>
 
         <div className="bg-white shadow rounded p-6">
@@ -44,7 +44,7 @@ const Ajuda = () => {
               <div key={index} className="border-b border-slate-200">
                 <button 
                   onClick={() => toggleFAQ(index)} 
-                  className="w-full text-left py-3 flex justify-between items-center font-medium text-slate-700 hover:text-blue-600"
+                  className="w-full text-left py-3 flex justify-between items-center font-medium text-slate-600 hover:text-blue-600"
                 >
                   {faq.pergunta}
                   <ChevronDown className={`transition-transform ${openIndex === index ? 'rotate-180' : ''}`} />

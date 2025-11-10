@@ -108,7 +108,7 @@ const Comanda = ({ comanda }) => {
                         const qt = item.quantidade || 0;
                         const precoTotalLinha = qt * preco;
 
-                        let itemClassName = "text-slate-700"; // Cor padrão
+                        let itemClassName = "text-slate-600"; // Cor padrão
                             
                             // Se o item foi entregue, fica cinza e riscado
                             if (item.status === 'ENTREGUE') {

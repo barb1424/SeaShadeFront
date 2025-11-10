@@ -1,4 +1,5 @@
 import Sidebar from "../components/Sidebar";
+import HeaderLogged from "../components/HeaderLogged"
 import { TrendingUp, BarChart as BarIcon, PieChart, Activity, Users, List } from "lucide-react"; 
 import React, { useState, useEffect } from "react";
 import {
@@ -87,8 +88,10 @@ const Relatorios = () => {
     return (
         <div className="text-slate-800 flex min-h-screen">
           <Sidebar className="w-[250px]" />
-          <div className="flex flex-col w-full pl-20 py-4 pr-4 md:pl-23 md:pr-8 mt-13">
-            <h1 className="text-3xl font-bold mb-8 text-blue-600">Relatórios</h1>
+
+          <div className="flex flex-col w-full pl-20 py-4 pr-4 md:pl-25 md:pr-9">
+  <HeaderLogged hasUndo/>
+            <h1 className="text-3xl font-bold mb-8 text-slate-600">Relatórios</h1>
             {loading && <p className="text-lg">Carregando relatórios...</p>}
             {error && <p className="text-lg text-red-500">{error}</p>}
           </div>
@@ -99,8 +102,10 @@ const Relatorios = () => {
   return (
   	<div className="text-slate-800 flex min-h-screen">
   	  <Sidebar className="w-[250px]" />
-  	  <div className="flex flex-col w-full pl-20 py-4 pr-4 md:pl-23 md:pr-8 mt-13">
-  	    <h1 className="text-3xl font-bold mb-8 text-blue-600">Relatórios</h1>
+
+  	  <div className="flex flex-col w-full pl-20 py-4 pr-4 md:pl-25 md:pr-9">
+  <HeaderLogged hasUndo/>
+  	    <h1 className="text-3xl font-bold mb-8 text-slate-600">Relatórios</h1>
 
   	    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
   	      {/* Vendas Totais Diárias */}

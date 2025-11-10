@@ -3,7 +3,7 @@ import HeaderLogged from "../components/HeaderLogged"
 import IconList from "../components/IconList"
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Settings, CircleQuestionMark } from 'lucide-react'
+import { Settings } from 'lucide-react'
 import apiClient from '../services/apiClient';
 import { useAuth } from '../context/AuthContext';
 
@@ -17,6 +17,7 @@ const NovoPedido = () => {
     const [selectedGuardaSolId, setSelectedGuardaSolId] = useState(null);
     const [observacoes, setObservacoes] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [mostrarInput, setMostrarInput] = useState(false);
 
     const fetchGuardaSois = async () => {
         const quiosqueId = user?.quiosque?.quiosqueId || user?.quiosqueId;
@@ -111,7 +112,7 @@ if (error && !guardaSois.length) {
                 <div className="flex flex-col">
                     <h1 className="text-2xl md:text-3xl font-bold">Criar Comanda</h1>
                     <form onSubmit={handleCriarComanda}>
-                        <fieldset className="flex flex-2 flex-col gap-3 my-5">
+                        <fieldset className="text-lg flex flex-2 flex-col gap-3 my-5">
                          <label>
                             <input
                             className="inset-shadow-sm focus:ring focus:outline-none focus:border-blue-600 bg-white py-4 lg:py-3 px-5 rounded border border-slate-300 text-slate-900 w-full" 
@@ -120,21 +121,28 @@ if (error && !guardaSois.length) {
                             value={user?.name || 'Carregando...'}
                             placeholder="Atendente"/>
                          </label>
-
+                        <label className="flex justify-between items-center ">
+                                <span className="flex items-center">Para viagem</span>
+                                <input 
+                                    type="checkbox"
+                                    className="transform scale-123"
+                                    checked={mostrarInput}
+                                    onChange={() => setMostrarInput(!mostrarInput)}
+                                 />
+                         </label>
+                         {!mostrarInput &&
                          <label>
+                            
                             <input
-                            className="inset-shadow-sm focus:ring focus:outline-none focus:border-blue-600 bg-white py-4 lg:py-3 px-5 rounded border border-slate-300 text-slate-900 w-full" 
+                            className=" inset-shadow-sm focus:ring focus:outline-none focus:border-blue-600 bg-white py-4 lg:py-3 px-5 rounded border border-slate-300 text-slate-900 w-full" 
                             type="text" 
                             readOnly
-                            value={selectedGuardaSolIdentificacao ? `#${selectedGuardaSolIdentificacao}` : 'Selecione na grade'}
+                            value={selectedGuardaSolIdentificacao ? `#${selectedGuardaSolIdentificacao}` : 'Selecione o guarda-sol na grade'}
                             placeholder="Número do guarda-sol"/>
                          </label>
+                            }
 
-                         <label className="flex justify-between items-center text-lg">
-                                {/* Mostrar informações ao passar o mouse no icone de interrogação */}
-                                <span className="flex gap-2 items-center">Pedido rápido <CircleQuestionMark size="18"/></span>
-                                <input type="checkbox" className="transform scale-123"/>
-                         </label>
+                         
 
                          <label>
                             <textarea 
@@ -159,7 +167,7 @@ if (error && !guardaSois.length) {
                 </div>
                <div className="flex flex-col gap-5 flex-1">
                     {/* Título */}
-                    <h2 className="text-2xl md:text-3xl font-bold text-slate-700">
+                    <h2 className="text-2xl md:text-3xl font-bold text-slate-600">
                         Seus Guarda-sóis
                     </h2>
 
@@ -167,7 +175,7 @@ if (error && !guardaSois.length) {
                     <div className="flex flex-wrap gap-3 items-center">
                         
                         <div className="bg-slate-50 rounded-lg px-3 py-1 shadow-sm text-slate-800 text-sm md:text-base">
-                        Quantidade: {total}
+                        Total: {total}
                         </div>
                         <div className="bg-green-100 rounded-lg px-3 py-1 shadow-sm text-green-800 text-sm md:text-base">
                         Disponíveis: {disponiveis}
@@ -187,7 +195,6 @@ if (error && !guardaSois.length) {
                         onGuardaSolClick={handleGuardaSolClick}
                         selectedGuardaSolId={selectedGuardaSolId}
                     />
-                    {guardaSois.length === 0 && !loading && <p className='text-center text-slate-500'>Nenhum guarda-sol cadastrado.</p>}
                     </div>
                 </div>
             </main>
